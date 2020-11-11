@@ -19,10 +19,10 @@ object ActorLifeCycle extends App {
   }
 
   val system = ActorSystem("lifeCycleDemo")
-  val parent = system.actorOf(Props[LifeCycleActor], "parent")
+  //val parent = system.actorOf(Props[LifeCycleActor], "parent")
 
-/*  parent ! StartChild
-  parent ! PoisonPill*/
+  //parent ! StartChild
+  //parent ! PoisonPill
 
   /**
    * restart
@@ -40,7 +40,7 @@ object ActorLifeCycle extends App {
 
     override def receive: Receive = {
       case FailChild => child ! Fail
-      case checkChild => child ! Check
+      case CheckChild => child ! Check
     }
   }
 

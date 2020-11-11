@@ -45,7 +45,7 @@ object StartingStoppingActors extends App {
    * method #1 - using context.stop
    */
   import Parent._
-  /*val parent = system.actorOf(Props[Parent],"parent")
+  val parent = system.actorOf(Props[Parent],"parent")
   parent ! StartChild("child1")
 
   val child = system.actorSelection("/user/parent/child1")
@@ -60,12 +60,11 @@ object StartingStoppingActors extends App {
   parent ! Stop
   for(_ <- 1 to 10) parent ! "parent are you there?" // should not be received
   for(i <- 1 to 100) child2 ! s"[$i] second kid are you there?"
-*/
   /**
    * method #2 - using special messages
    */
 
-/*  val looseActor = system.actorOf(Props[Child])
+  val looseActor = system.actorOf(Props[Child])
   looseActor ! "hello, loose actor"
   looseActor ! PoisonPill
 
@@ -74,7 +73,7 @@ object StartingStoppingActors extends App {
   var abruptlyTerminateActor = system.actorOf(Props[Child])
   abruptlyTerminateActor ! "you are about to be terminated"
   abruptlyTerminateActor ! Kill
-  abruptlyTerminateActor ! "you have been terminated"*/
+  abruptlyTerminateActor ! "you have been terminated"
 
   /**
    *  Death watch
@@ -92,7 +91,7 @@ object StartingStoppingActors extends App {
         log.info(s"the reference that I am watching $ref has been stopped")
     }
   }
-
+  import Parent._
   val watcher = system.actorOf(Props[Watcher], "watcher")
   watcher ! StartChild("watchedChild")
   val watchedChild = system.actorSelection("/user/watcher/watchedChild")
